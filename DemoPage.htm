@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	    <h1>Send Fax</h1>
+				<form method="post" action="https://api.westfax.com/Polka.Api/REST/SendFax/XML" enctype="multipart/form-data">
+					<table>
+						<tr><td>Username:</td><td><input type="text" name="UserName" value="SampleUsername" /></td></tr>
+						<tr><td>Password:</td><td><input type="text" name="Password" value="SamplePassword" /></td></tr>
+						<tr><td>Product ID:</td><td><input type="text" name="ProductId" value="00000000-0000-0000-0000-000000000000" /></td></tr>
+						<tr><td>Phone Number 1:</td><td><input type="text" name="Numbers1" value="5555555555" /></td></tr>
+						<tr><td>Job Name:</td><td><input type="text" name="JobName" value="Test Job" /></td></tr>
+						<tr><td>Document 1:</td><td><input type="file" name="Files1" /></td></tr>
+						<tr><td>Document 2:</td><td><input type="file" name="Files2" /></td></tr>
+						<tr><td>Header:</td><td><input type="text" name="Header" value="This is a header" /></td></tr>
+						<tr><td>Billing Code:</td><td><input type="text" name="BillingCode" value="This is a billing code" /></td></tr>
+						<tr><td>CSID:</td><td><input type="text" name="CSID" value="" /></td></tr>
+						<tr><td>Fax Quality:</td><td><input type="text" name="FaxQuality" value="Normal" /></td></tr>
+						<tr><td>Start Date:</td><td><input type="text" name="StartDate" value="04/10/2010 12:33:00" /></td></tr>
+						<tr><td><input type="submit" name="Submit" value="Submit" /></td></tr>
+					</table>
+				</form>
+        <h1>Get Fax Status</h1>
+        <form method="post" action="https://api.westfax.com/Polka.Api/REST/GetFaxStatus/XML" id="faxquery" enctype="multipart/form-data">
+					<table>
+							<tr><td>Username:</td><td><input type="text" name="UserName" value="SampleUsername" /></td></tr>
+							<tr><td>Password:</td><td><input type="text" name="Password" value="SamplePassword" /></td></tr>
+							<tr><td>Product ID:</td><td><input type="text" name="ProductId" value="00000000-0000-0000-0000-000000000000" /></td></tr>
+							<tr><td>Job Id:</td><td><input type="text" name="Ids1" value="00000000-0000-0000-0000-000000000000" /></td></tr>
+							<tr><td><input type="submit" name="Query" value="Query" /></td></tr>
+					</table>
+        </form>
+	</body>
+</html>

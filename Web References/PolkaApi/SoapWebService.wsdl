@@ -1,0 +1,3387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://api.westfax.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://api.westfax.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://api.westfax.com/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="Authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Cookies" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfString">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticateWithToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Cookies" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateWithTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateWithTokenResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateWithProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProductId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Cookies" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateWithProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateWithProductResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxProductListStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productType" type="tns:ProductType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ProductType">
+        <s:restriction base="s:string">
+          <s:enumeration value="BroadcastFax" />
+          <s:enumeration value="FaxForward" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetFaxProductListStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxProductListStatefulCookieResult" type="tns:ApiResultOfListOfFaxProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfFaxProductContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfFaxProductContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFaxProductContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FaxProductContainer" nillable="true" type="tns:FaxProductContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FaxProductContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFaxProductListStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productType" type="tns:ProductType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxProductListStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxProductListStatefulNoCookieResult" type="tns:ApiResultOfListOfFaxProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxProductListStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productType" type="tns:ProductType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxProductListStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxProductListStatelessResult" type="tns:ApiResultOfListOfFaxProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVoiceProductListStatefulCookie">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVoiceProductListStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVoiceProductListStatefulCookieResult" type="tns:ApiResultOfListOfVoiceProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfVoiceProductContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfVoiceProductContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfVoiceProductContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VoiceProductContainer" nillable="true" type="tns:VoiceProductContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VoiceProductContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCallCredits" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UsedCallCredits" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableCallCredits" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageDisplayName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="tns:ServiceMessageType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ServiceMessageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unassigned" />
+          <s:enumeration value="AppointmentReminders" />
+          <s:enumeration value="AppointmentRemindersMultiPurpose" />
+          <s:enumeration value="AppointmentRemindersLocationConfirmation" />
+          <s:enumeration value="AppointmentRemindersTimeWindow" />
+          <s:enumeration value="PastDueCollections" />
+          <s:enumeration value="PastDueCollectionsDebtCollection" />
+          <s:enumeration value="PastDueCollectionsRPVLateFee" />
+          <s:enumeration value="PastDueCollectionsRPVServiceTermination" />
+          <s:enumeration value="TeamGroupVoiceBroadcast" />
+          <s:enumeration value="TeamGroupVoiceBroadcastNameAndQuestion" />
+          <s:enumeration value="TeamGroupVoiceBroadcastQuickAndEasyGroup" />
+          <s:enumeration value="TeamGroupVoiceBroadcastTTSAnnouncement" />
+          <s:enumeration value="InteractiveSurveys" />
+          <s:enumeration value="InteractiveSurveysFourQuestion" />
+          <s:enumeration value="InteractiveSurveysTwoQuestionWithFU" />
+          <s:enumeration value="InteractiveSurveysMultipleChoice" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetVoiceProductListStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVoiceProductListStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVoiceProductListStatefulNoCookieResult" type="tns:ApiResultOfListOfVoiceProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVoiceProductListStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVoiceProductListStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVoiceProductListStatelessResult" type="tns:ApiResultOfListOfVoiceProductContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetProductIdStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetProductIdStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetProductIdStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetProductIdStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetProductIdStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetProductIdStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentLinksStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileIds" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="1" maxOccurs="1" name="ContentDisposition" type="tns:ContentDisposition" />
+            <s:element minOccurs="1" maxOccurs="1" name="ErrorMode" type="tns:ErrorMode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ContentDisposition">
+        <s:restriction base="s:string">
+          <s:enumeration value="Inline" />
+          <s:enumeration value="Attachment" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ErrorMode">
+        <s:restriction base="s:string">
+          <s:enumeration value="HTTPStatus" />
+          <s:enumeration value="XmlStatus" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetDocumentLinksStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentLinksStatefulCookieResult" type="tns:ApiResultOfListOfDocumentContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfDocumentContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfDocumentContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDocumentContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocumentContainer" nillable="true" type="tns:DocumentContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentLink" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentId" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDocumentLinksStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileIds" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="1" maxOccurs="1" name="ContentDisposition" type="tns:ContentDisposition" />
+            <s:element minOccurs="1" maxOccurs="1" name="ErrorMode" type="tns:ErrorMode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentLinksStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentLinksStatefulNoCookieResult" type="tns:ApiResultOfListOfDocumentContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentLinksStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileIds" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="1" maxOccurs="1" name="ContentDisposition" type="tns:ContentDisposition" />
+            <s:element minOccurs="1" maxOccurs="1" name="ErrorMode" type="tns:ErrorMode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentLinksStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentLinksStatelessResult" type="tns:ApiResultOfListOfDocumentContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreviewStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFileContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FileContainer" nillable="true" type="tns:FileContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FileContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Filename" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileContents" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ContentLength" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentEncoding" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ContentDisposition" nillable="true" type="tns:ContentDisposition" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FaxQuality">
+        <s:restriction base="s:string">
+          <s:enumeration value="Fine" />
+          <s:enumeration value="Normal" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetPreviewStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPreviewStatefulCookieResult" type="tns:ApiResultOfFileContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfFileContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:FileContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPreviewStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreviewStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPreviewStatefulNoCookieResult" type="tns:ApiResultOfFileContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreviewStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreviewStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPreviewStatelessResult" type="tns:ApiResultOfFileContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastFaxStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendBroadcastFaxStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastFaxStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastFaxStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastFaxStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastFaxStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastFaxStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastFaxStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastFaxStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBroadcastFaxJobStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBroadcastFaxJobStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBroadcastFaxJobStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBroadcastFaxJobStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitBroadcastFaxJobStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="jobId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitBroadcastFaxJobStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="jobId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitBroadcastFaxJobStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitBroadcastFaxJobStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxJobsStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxJobsStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxJobsStatefulCookieResult" type="tns:ApiResultOfListOfApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfApiResultOfString">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfApiResultOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfApiResultOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ApiResultOfString" nillable="true" type="tns:ApiResultOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendFaxJobsStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxJobsStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxJobsStatefulNoCookieResult" type="tns:ApiResultOfListOfApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxJobsStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="faxQuality" nillable="true" type="tns:FaxQuality" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="feedbackEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFaxJobsStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFaxJobsStatelessResult" type="tns:ApiResultOfListOfApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendVoiceCallStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendVoiceCallStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallFaxStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendVoiceCallFaxStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendVoiceCallFaxStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastVoiceJobStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastVoiceJobStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="header" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numbers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="files" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="dialList" type="tns:ArrayOfFileContainer" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendBroadcastVoiceJobStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendBroadcastVoiceJobStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastVoiceStatusStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastVoiceStatusStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastVoiceStatusStatefulCookieResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfBroadcastFaxJobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfBroadcastFaxJobStatusContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBroadcastFaxJobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BroadcastFaxJobStatusContainer" nillable="true" type="tns:BroadcastFaxJobStatusContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BroadcastFaxJobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="JobId" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="JobState" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuerySuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobEstimate" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountSuccessful" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountRemoved" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountFailed" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DetailReport" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBroadcastVoiceStatusStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastVoiceStatusStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastVoiceStatusStatefulNoCookieResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastVoiceStatusStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastVoiceStatusStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastVoiceStatusStatelessResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallStatusStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallStatusStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCallStatusStatefulCookieResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfJobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfJobStatusContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfJobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="JobStatusContainer" nillable="true" type="tns:JobStatusContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="JobStatusContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="JobId" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="JobState" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuerySuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobEstimate" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Calls" type="tns:ArrayOfCallContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCallContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CallContainer" nillable="true" type="tns:CallContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CallContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CallResult" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PagesSent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JobPages" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DurationSeconds" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompleteUtc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxConnectionSpeed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxRemoteCsid" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCallStatusStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallStatusStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCallStatusStatefulNoCookieResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallStatusStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCallStatusStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCallStatusStatelessResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastFaxStatusStatefulCookieResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastFaxStatusStatefulNoCookieResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBroadcastFaxStatusStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBroadcastFaxStatusStatelessResult" type="tns:ApiResultOfListOfBroadcastFaxJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxStatusStatefulCookieResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxStatusStatefulNoCookieResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFaxStatusStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFaxStatusStatelessResult" type="tns:ApiResultOfListOfJobStatusContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddFaxRemovalNumberStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddFaxRemovalNumberStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFaxRemovalNumberStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddFaxRemovalNumberStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryFaxGlobalRemovalsStatefulCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryFaxGlobalRemovalsStatefulNoCookieResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="FaxRemovalNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFaxGlobalRemovalsStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryFaxGlobalRemovalsStatelessResult" type="tns:ApiResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxListStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxListStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxListStatefulCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfListOfInFaxContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfInFaxContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInFaxContainer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InFaxContainer" nillable="true" type="tns:InFaxContainer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InFaxContainer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:FileContainer">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="InFaxId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Pages" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="FaxQuality" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetInboundFaxListStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxListStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxListStatefulNoCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxListStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxListStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxListStatelessResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewInboundFaxListStatefulCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewInboundFaxListStatefulNoCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inboundFaxNums" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewInboundFaxListStatefulStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewInboundFaxListStatefulStatelessResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkInboundFaxesDownloadedStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkInboundFaxesDownloadedStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MarkInboundFaxesDownloadedStatefulCookieResult" type="tns:ApiResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ApiResultOfBoolean">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MarkInboundFaxesDownloadedStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkInboundFaxesDownloadedStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MarkInboundFaxesDownloadedStatefulNoCookieResult" type="tns:ApiResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkInboundFaxesDownloadedStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkInboundFaxesDownloadedStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MarkInboundFaxesDownloadedStatelessResult" type="tns:ApiResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStatefulCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStatefulCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxesStatefulCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStatefulNoCookie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStatefulNoCookieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxesStatefulNoCookieResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStateless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="frIds" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboundFaxesStatelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboundFaxesStatelessResult" type="tns:ApiResultOfListOfInFaxContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateWithTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateWithToken" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateWithTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateWithTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateWithProductSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateWithProduct" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateWithProductSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateWithProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxProductListStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxProductListStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetVoiceProductListStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVoiceProductListStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetProductIdStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SetProductIdStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SetProductIdStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SetProductIdStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetProductIdStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SetProductIdStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SetProductIdStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SetProductIdStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentLinksStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentLinksStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPreviewStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPreviewStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPreviewStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPreviewStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPreviewStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetPreviewStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPreviewStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStateless" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastFaxStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastFaxStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStateless" />
+  </wsdl:message>
+  <wsdl:message name="CreateBroadcastFaxJobStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBroadcastFaxJobStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStateless" />
+  </wsdl:message>
+  <wsdl:message name="SubmitBroadcastFaxJobStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitBroadcastFaxJobStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxStateless" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStateless" />
+  </wsdl:message>
+  <wsdl:message name="SendFaxJobsStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFaxJobsStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallFaxStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallFaxStateless" />
+  </wsdl:message>
+  <wsdl:message name="SendVoiceCallFaxStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SendVoiceCallFaxStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStateless" />
+  </wsdl:message>
+  <wsdl:message name="SendBroadcastVoiceJobStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:SendBroadcastVoiceJobStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastVoiceStatusStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastVoiceStatusStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetCallStatusStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCallStatusStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetBroadcastFaxStatusStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBroadcastFaxStatusStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetFaxStatusStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFaxStatusStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStateless" />
+  </wsdl:message>
+  <wsdl:message name="AddFaxRemovalNumberStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:AddFaxRemovalNumberStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStateless" />
+  </wsdl:message>
+  <wsdl:message name="QueryFaxGlobalRemovalsStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryFaxGlobalRemovalsStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxListStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxListStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetNewInboundFaxListStatefulStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewInboundFaxListStatefulStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStateless" />
+  </wsdl:message>
+  <wsdl:message name="MarkInboundFaxesDownloadedStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:MarkInboundFaxesDownloadedStatelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatefulCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStatefulCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatefulCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStatefulCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatefulNoCookieSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStatefulNoCookie" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatefulNoCookieSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStatefulNoCookieResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatelessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStateless" />
+  </wsdl:message>
+  <wsdl:message name="GetInboundFaxesStatelessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboundFaxesStatelessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SoapWebServiceSoap">
+    <wsdl:operation name="Authenticate">
+      <wsdl:input message="tns:AuthenticateSoapIn" />
+      <wsdl:output message="tns:AuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateWithToken">
+      <wsdl:input message="tns:AuthenticateWithTokenSoapIn" />
+      <wsdl:output message="tns:AuthenticateWithTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <wsdl:input name="AuthenticateWithProduct" message="tns:AuthenticateWithProductSoapIn" />
+      <wsdl:output name="AuthenticateWithProduct" message="tns:AuthenticateWithProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <wsdl:input name="GetFaxProductListStatefulCookie" message="tns:GetFaxProductListStatefulCookieSoapIn" />
+      <wsdl:output name="GetFaxProductListStatefulCookie" message="tns:GetFaxProductListStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <wsdl:input name="GetFaxProductListStatefulNoCookie" message="tns:GetFaxProductListStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetFaxProductListStatefulNoCookie" message="tns:GetFaxProductListStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <wsdl:input name="GetFaxProductListStateless" message="tns:GetFaxProductListStatelessSoapIn" />
+      <wsdl:output name="GetFaxProductListStateless" message="tns:GetFaxProductListStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <wsdl:input name="GetVoiceProductListStatefulCookie" message="tns:GetVoiceProductListStatefulCookieSoapIn" />
+      <wsdl:output name="GetVoiceProductListStatefulCookie" message="tns:GetVoiceProductListStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <wsdl:input name="GetVoiceProductListStatefulNoCookie" message="tns:GetVoiceProductListStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetVoiceProductListStatefulNoCookie" message="tns:GetVoiceProductListStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <wsdl:input name="GetVoiceProductListStateless" message="tns:GetVoiceProductListStatelessSoapIn" />
+      <wsdl:output name="GetVoiceProductListStateless" message="tns:GetVoiceProductListStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <wsdl:input name="SetProductIdStatefulCookie" message="tns:SetProductIdStatefulCookieSoapIn" />
+      <wsdl:output name="SetProductIdStatefulCookie" message="tns:SetProductIdStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <wsdl:input name="SetProductIdStatefulNoCookie" message="tns:SetProductIdStatefulNoCookieSoapIn" />
+      <wsdl:output name="SetProductIdStatefulNoCookie" message="tns:SetProductIdStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <wsdl:input name="GetDocumentLinksStatefulCookie" message="tns:GetDocumentLinksStatefulCookieSoapIn" />
+      <wsdl:output name="GetDocumentLinksStatefulCookie" message="tns:GetDocumentLinksStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <wsdl:input name="GetDocumentLinksStatefulNoCookie" message="tns:GetDocumentLinksStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetDocumentLinksStatefulNoCookie" message="tns:GetDocumentLinksStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <wsdl:input name="GetDocumentLinksStateless" message="tns:GetDocumentLinksStatelessSoapIn" />
+      <wsdl:output name="GetDocumentLinksStateless" message="tns:GetDocumentLinksStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <wsdl:input name="GetPreviewStatefulCookie" message="tns:GetPreviewStatefulCookieSoapIn" />
+      <wsdl:output name="GetPreviewStatefulCookie" message="tns:GetPreviewStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <wsdl:input name="GetPreviewStatefulNoCookie" message="tns:GetPreviewStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetPreviewStatefulNoCookie" message="tns:GetPreviewStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <wsdl:input name="GetPreviewStateless" message="tns:GetPreviewStatelessSoapIn" />
+      <wsdl:output name="GetPreviewStateless" message="tns:GetPreviewStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <wsdl:input name="SendBroadcastFaxStatefulCookie" message="tns:SendBroadcastFaxStatefulCookieSoapIn" />
+      <wsdl:output name="SendBroadcastFaxStatefulCookie" message="tns:SendBroadcastFaxStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <wsdl:input name="SendBroadcastFaxStatefulNoCookie" message="tns:SendBroadcastFaxStatefulNoCookieSoapIn" />
+      <wsdl:output name="SendBroadcastFaxStatefulNoCookie" message="tns:SendBroadcastFaxStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <wsdl:input name="SendBroadcastFaxStateless" message="tns:SendBroadcastFaxStatelessSoapIn" />
+      <wsdl:output name="SendBroadcastFaxStateless" message="tns:SendBroadcastFaxStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <wsdl:input name="CreateBroadcastFaxJobStatefulCookie" message="tns:CreateBroadcastFaxJobStatefulCookieSoapIn" />
+      <wsdl:output name="CreateBroadcastFaxJobStatefulCookie" message="tns:CreateBroadcastFaxJobStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <wsdl:input name="CreateBroadcastFaxJobStatefulNoCookie" message="tns:CreateBroadcastFaxJobStatefulNoCookieSoapIn" />
+      <wsdl:output name="CreateBroadcastFaxJobStatefulNoCookie" message="tns:CreateBroadcastFaxJobStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <wsdl:input name="CreateBroadcastFaxJobStateless" message="tns:CreateBroadcastFaxJobStatelessSoapIn" />
+      <wsdl:output name="CreateBroadcastFaxJobStateless" message="tns:CreateBroadcastFaxJobStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulCookie" message="tns:SubmitBroadcastFaxJobStatefulCookieSoapIn" />
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulCookie" message="tns:SubmitBroadcastFaxJobStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulNoCookie" message="tns:SubmitBroadcastFaxJobStatefulNoCookieSoapIn" />
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulNoCookie" message="tns:SubmitBroadcastFaxJobStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <wsdl:input name="SubmitBroadcastFaxJobStateless" message="tns:SubmitBroadcastFaxJobStatelessSoapIn" />
+      <wsdl:output name="SubmitBroadcastFaxJobStateless" message="tns:SubmitBroadcastFaxJobStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <wsdl:input name="SendFaxStatefulCookie" message="tns:SendFaxStatefulCookieSoapIn" />
+      <wsdl:output name="SendFaxStatefulCookie" message="tns:SendFaxStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <wsdl:input name="SendFaxStatefulNoCookie" message="tns:SendFaxStatefulNoCookieSoapIn" />
+      <wsdl:output name="SendFaxStatefulNoCookie" message="tns:SendFaxStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <wsdl:input name="SendFaxStateless" message="tns:SendFaxStatelessSoapIn" />
+      <wsdl:output name="SendFaxStateless" message="tns:SendFaxStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <wsdl:input name="SendFaxJobsStatefulCookie" message="tns:SendFaxJobsStatefulCookieSoapIn" />
+      <wsdl:output name="SendFaxJobsStatefulCookie" message="tns:SendFaxJobsStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <wsdl:input name="SendFaxJobsStatefulNoCookie" message="tns:SendFaxJobsStatefulNoCookieSoapIn" />
+      <wsdl:output name="SendFaxJobsStatefulNoCookie" message="tns:SendFaxJobsStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <wsdl:input name="SendFaxJobsStateless" message="tns:SendFaxJobsStatelessSoapIn" />
+      <wsdl:output name="SendFaxJobsStateless" message="tns:SendFaxJobsStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <wsdl:input name="SendVoiceCallStatefulCookie" message="tns:SendVoiceCallStatefulCookieSoapIn" />
+      <wsdl:output name="SendVoiceCallStatefulCookie" message="tns:SendVoiceCallStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <wsdl:input name="SendVoiceCallStatefulNoCookie" message="tns:SendVoiceCallStatefulNoCookieSoapIn" />
+      <wsdl:output name="SendVoiceCallStatefulNoCookie" message="tns:SendVoiceCallStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <wsdl:input name="SendVoiceCallFaxStateless" message="tns:SendVoiceCallFaxStatelessSoapIn" />
+      <wsdl:output name="SendVoiceCallFaxStateless" message="tns:SendVoiceCallFaxStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <wsdl:input name="SendBroadcastVoiceJobStatefulCookie" message="tns:SendBroadcastVoiceJobStatefulCookieSoapIn" />
+      <wsdl:output name="SendBroadcastVoiceJobStatefulCookie" message="tns:SendBroadcastVoiceJobStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <wsdl:input name="SendBroadcastVoiceJobStatefulNoCookie" message="tns:SendBroadcastVoiceJobStatefulNoCookieSoapIn" />
+      <wsdl:output name="SendBroadcastVoiceJobStatefulNoCookie" message="tns:SendBroadcastVoiceJobStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <wsdl:input name="SendBroadcastVoiceJobStateless" message="tns:SendBroadcastVoiceJobStatelessSoapIn" />
+      <wsdl:output name="SendBroadcastVoiceJobStateless" message="tns:SendBroadcastVoiceJobStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulCookie" message="tns:GetBroadcastVoiceStatusStatefulCookieSoapIn" />
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulCookie" message="tns:GetBroadcastVoiceStatusStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulNoCookie" message="tns:GetBroadcastVoiceStatusStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulNoCookie" message="tns:GetBroadcastVoiceStatusStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <wsdl:input name="GetBroadcastVoiceStatusStateless" message="tns:GetBroadcastVoiceStatusStatelessSoapIn" />
+      <wsdl:output name="GetBroadcastVoiceStatusStateless" message="tns:GetBroadcastVoiceStatusStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <wsdl:input name="GetCallStatusStatefulCookie" message="tns:GetCallStatusStatefulCookieSoapIn" />
+      <wsdl:output name="GetCallStatusStatefulCookie" message="tns:GetCallStatusStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <wsdl:input name="GetCallStatusStatefulNoCookie" message="tns:GetCallStatusStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetCallStatusStatefulNoCookie" message="tns:GetCallStatusStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <wsdl:input name="GetCallStatusStateless" message="tns:GetCallStatusStatelessSoapIn" />
+      <wsdl:output name="GetCallStatusStateless" message="tns:GetCallStatusStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <wsdl:input name="GetBroadcastFaxStatusStatefulCookie" message="tns:GetBroadcastFaxStatusStatefulCookieSoapIn" />
+      <wsdl:output name="GetBroadcastFaxStatusStatefulCookie" message="tns:GetBroadcastFaxStatusStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <wsdl:input name="GetBroadcastFaxStatusStatefulNoCookie" message="tns:GetBroadcastFaxStatusStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetBroadcastFaxStatusStatefulNoCookie" message="tns:GetBroadcastFaxStatusStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <wsdl:input name="GetBroadcastFaxStatusStateless" message="tns:GetBroadcastFaxStatusStatelessSoapIn" />
+      <wsdl:output name="GetBroadcastFaxStatusStateless" message="tns:GetBroadcastFaxStatusStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <wsdl:input name="GetFaxStatusStatefulCookie" message="tns:GetFaxStatusStatefulCookieSoapIn" />
+      <wsdl:output name="GetFaxStatusStatefulCookie" message="tns:GetFaxStatusStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <wsdl:input name="GetFaxStatusStatefulNoCookie" message="tns:GetFaxStatusStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetFaxStatusStatefulNoCookie" message="tns:GetFaxStatusStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <wsdl:input name="GetFaxStatusStateless" message="tns:GetFaxStatusStatelessSoapIn" />
+      <wsdl:output name="GetFaxStatusStateless" message="tns:GetFaxStatusStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <wsdl:input name="AddFaxRemovalNumberStatefulCookie" message="tns:AddFaxRemovalNumberStatefulCookieSoapIn" />
+      <wsdl:output name="AddFaxRemovalNumberStatefulCookie" message="tns:AddFaxRemovalNumberStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <wsdl:input name="AddFaxRemovalNumberStatefulNoCookie" message="tns:AddFaxRemovalNumberStatefulNoCookieSoapIn" />
+      <wsdl:output name="AddFaxRemovalNumberStatefulNoCookie" message="tns:AddFaxRemovalNumberStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <wsdl:input name="AddFaxRemovalNumberStateless" message="tns:AddFaxRemovalNumberStatelessSoapIn" />
+      <wsdl:output name="AddFaxRemovalNumberStateless" message="tns:AddFaxRemovalNumberStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulCookie" message="tns:QueryFaxGlobalRemovalsStatefulCookieSoapIn" />
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulCookie" message="tns:QueryFaxGlobalRemovalsStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulNoCookie" message="tns:QueryFaxGlobalRemovalsStatefulNoCookieSoapIn" />
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulNoCookie" message="tns:QueryFaxGlobalRemovalsStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <wsdl:input name="QueryFaxGlobalRemovalsStateless" message="tns:QueryFaxGlobalRemovalsStatelessSoapIn" />
+      <wsdl:output name="QueryFaxGlobalRemovalsStateless" message="tns:QueryFaxGlobalRemovalsStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <wsdl:input name="GetInboundFaxListStatefulCookie" message="tns:GetInboundFaxListStatefulCookieSoapIn" />
+      <wsdl:output name="GetInboundFaxListStatefulCookie" message="tns:GetInboundFaxListStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <wsdl:input name="GetInboundFaxListStatefulNoCookie" message="tns:GetInboundFaxListStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetInboundFaxListStatefulNoCookie" message="tns:GetInboundFaxListStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <wsdl:input name="GetInboundFaxListStateless" message="tns:GetInboundFaxListStatelessSoapIn" />
+      <wsdl:output name="GetInboundFaxListStateless" message="tns:GetInboundFaxListStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <wsdl:input name="GetNewInboundFaxListStatefulCookie" message="tns:GetNewInboundFaxListStatefulCookieSoapIn" />
+      <wsdl:output name="GetNewInboundFaxListStatefulCookie" message="tns:GetNewInboundFaxListStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <wsdl:input name="GetNewInboundFaxListStatefulNoCookie" message="tns:GetNewInboundFaxListStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetNewInboundFaxListStatefulNoCookie" message="tns:GetNewInboundFaxListStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <wsdl:input name="GetNewInboundFaxListStatefulStateless" message="tns:GetNewInboundFaxListStatefulStatelessSoapIn" />
+      <wsdl:output name="GetNewInboundFaxListStatefulStateless" message="tns:GetNewInboundFaxListStatefulStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulCookie" message="tns:MarkInboundFaxesDownloadedStatefulCookieSoapIn" />
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulCookie" message="tns:MarkInboundFaxesDownloadedStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulNoCookie" message="tns:MarkInboundFaxesDownloadedStatefulNoCookieSoapIn" />
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulNoCookie" message="tns:MarkInboundFaxesDownloadedStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <wsdl:input name="MarkInboundFaxesDownloadedStateless" message="tns:MarkInboundFaxesDownloadedStatelessSoapIn" />
+      <wsdl:output name="MarkInboundFaxesDownloadedStateless" message="tns:MarkInboundFaxesDownloadedStatelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <wsdl:input name="GetInboundFaxesStatefulCookie" message="tns:GetInboundFaxesStatefulCookieSoapIn" />
+      <wsdl:output name="GetInboundFaxesStatefulCookie" message="tns:GetInboundFaxesStatefulCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <wsdl:input name="GetInboundFaxesStatefulNoCookie" message="tns:GetInboundFaxesStatefulNoCookieSoapIn" />
+      <wsdl:output name="GetInboundFaxesStatefulNoCookie" message="tns:GetInboundFaxesStatefulNoCookieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <wsdl:input name="GetInboundFaxesStateless" message="tns:GetInboundFaxesStatelessSoapIn" />
+      <wsdl:output name="GetInboundFaxesStateless" message="tns:GetInboundFaxesStatelessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SoapWebServiceSoap" type="tns:SoapWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="https://api.westfax.com/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateWithToken">
+      <soap:operation soapAction="https://api.westfax.com/AuthenticateWithToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="https://api.westfax.com/AuthenticateWithProduct" style="document" />
+      <wsdl:input name="AuthenticateWithProduct">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AuthenticateWithProduct">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxProductListStatefulCookie" style="document" />
+      <wsdl:input name="GetFaxProductListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxProductListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetFaxProductListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxProductListStateless" style="document" />
+      <wsdl:input name="GetFaxProductListStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetVoiceProductListStatefulCookie" style="document" />
+      <wsdl:input name="GetVoiceProductListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetVoiceProductListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetVoiceProductListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap:operation soapAction="https://api.westfax.com/GetVoiceProductListStateless" style="document" />
+      <wsdl:input name="GetVoiceProductListStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <soap:operation soapAction="https://api.westfax.com/SetProductIdStatefulCookie" style="document" />
+      <wsdl:input name="SetProductIdStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SetProductIdStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <soap:operation soapAction="https://api.westfax.com/SetProductIdStatefulNoCookie" style="document" />
+      <wsdl:input name="SetProductIdStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SetProductIdStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap:operation soapAction="https://api.westfax.com/GetDocumentLinksStatefulCookie" style="document" />
+      <wsdl:input name="GetDocumentLinksStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap:operation soapAction="https://api.westfax.com/GetDocumentLinksStatefulNoCookie" style="document" />
+      <wsdl:input name="GetDocumentLinksStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap:operation soapAction="https://api.westfax.com/GetDocumentLinksStateless" style="document" />
+      <wsdl:input name="GetDocumentLinksStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap:operation soapAction="https://api.westfax.com/GetPreviewStatefulCookie" style="document" />
+      <wsdl:input name="GetPreviewStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap:operation soapAction="https://api.westfax.com/GetPreviewStatefulNoCookie" style="document" />
+      <wsdl:input name="GetPreviewStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap:operation soapAction="https://api.westfax.com/GetPreviewStateless" style="document" />
+      <wsdl:input name="GetPreviewStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastFaxStatefulCookie" style="document" />
+      <wsdl:input name="SendBroadcastFaxStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastFaxStatefulNoCookie" style="document" />
+      <wsdl:input name="SendBroadcastFaxStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastFaxStateless" style="document" />
+      <wsdl:input name="SendBroadcastFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStatefulCookie" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStatefulNoCookie" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStateless" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStatefulCookie" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStatefulNoCookie" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStateless" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxStatefulCookie" style="document" />
+      <wsdl:input name="SendFaxStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxStatefulNoCookie" style="document" />
+      <wsdl:input name="SendFaxStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxStateless" style="document" />
+      <wsdl:input name="SendFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxJobsStatefulCookie" style="document" />
+      <wsdl:input name="SendFaxJobsStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxJobsStatefulNoCookie" style="document" />
+      <wsdl:input name="SendFaxJobsStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap:operation soapAction="https://api.westfax.com/SendFaxJobsStateless" style="document" />
+      <wsdl:input name="SendFaxJobsStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap:operation soapAction="https://api.westfax.com/SendVoiceCallStatefulCookie" style="document" />
+      <wsdl:input name="SendVoiceCallStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap:operation soapAction="https://api.westfax.com/SendVoiceCallStatefulNoCookie" style="document" />
+      <wsdl:input name="SendVoiceCallStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap:operation soapAction="https://api.westfax.com/SendVoiceCallFaxStateless" style="document" />
+      <wsdl:input name="SendVoiceCallFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallFaxStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStatefulCookie" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStatefulNoCookie" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStateless" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStateless" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetCallStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetCallStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetCallStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetCallStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetCallStatusStateless" style="document" />
+      <wsdl:input name="GetCallStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStateless" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetFaxStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetFaxStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap:operation soapAction="https://api.westfax.com/GetFaxStatusStateless" style="document" />
+      <wsdl:input name="GetFaxStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStatefulCookie" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStatefulNoCookie" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStateless" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStatefulCookie" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStatefulNoCookie" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStateless" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxListStatefulCookie" style="document" />
+      <wsdl:input name="GetInboundFaxListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetInboundFaxListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxListStateless" style="document" />
+      <wsdl:input name="GetInboundFaxListStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulCookie" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulStateless" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStatefulCookie" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStatefulNoCookie" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStateless" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxesStatefulCookie" style="document" />
+      <wsdl:input name="GetInboundFaxesStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStatefulCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxesStatefulNoCookie" style="document" />
+      <wsdl:input name="GetInboundFaxesStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStatefulNoCookie">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap:operation soapAction="https://api.westfax.com/GetInboundFaxesStateless" style="document" />
+      <wsdl:input name="GetInboundFaxesStateless">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStateless">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SoapWebServiceSoap12" type="tns:SoapWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap12:operation soapAction="https://api.westfax.com/Authenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateWithToken">
+      <soap12:operation soapAction="https://api.westfax.com/AuthenticateWithToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <soap12:operation soapAction="https://api.westfax.com/AuthenticateWithProduct" style="document" />
+      <wsdl:input name="AuthenticateWithProduct">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AuthenticateWithProduct">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxProductListStatefulCookie" style="document" />
+      <wsdl:input name="GetFaxProductListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxProductListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetFaxProductListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxProductListStateless" style="document" />
+      <wsdl:input name="GetFaxProductListStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxProductListStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetVoiceProductListStatefulCookie" style="document" />
+      <wsdl:input name="GetVoiceProductListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetVoiceProductListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetVoiceProductListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVoiceProductList">
+      <soap12:operation soapAction="https://api.westfax.com/GetVoiceProductListStateless" style="document" />
+      <wsdl:input name="GetVoiceProductListStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetVoiceProductListStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <soap12:operation soapAction="https://api.westfax.com/SetProductIdStatefulCookie" style="document" />
+      <wsdl:input name="SetProductIdStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SetProductIdStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProductId">
+      <soap12:operation soapAction="https://api.westfax.com/SetProductIdStatefulNoCookie" style="document" />
+      <wsdl:input name="SetProductIdStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SetProductIdStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap12:operation soapAction="https://api.westfax.com/GetDocumentLinksStatefulCookie" style="document" />
+      <wsdl:input name="GetDocumentLinksStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap12:operation soapAction="https://api.westfax.com/GetDocumentLinksStatefulNoCookie" style="document" />
+      <wsdl:input name="GetDocumentLinksStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentLinks">
+      <soap12:operation soapAction="https://api.westfax.com/GetDocumentLinksStateless" style="document" />
+      <wsdl:input name="GetDocumentLinksStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDocumentLinksStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap12:operation soapAction="https://api.westfax.com/GetPreviewStatefulCookie" style="document" />
+      <wsdl:input name="GetPreviewStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap12:operation soapAction="https://api.westfax.com/GetPreviewStatefulNoCookie" style="document" />
+      <wsdl:input name="GetPreviewStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreview">
+      <soap12:operation soapAction="https://api.westfax.com/GetPreviewStateless" style="document" />
+      <wsdl:input name="GetPreviewStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPreviewStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastFaxStatefulCookie" style="document" />
+      <wsdl:input name="SendBroadcastFaxStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastFaxStatefulNoCookie" style="document" />
+      <wsdl:input name="SendBroadcastFaxStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastFaxStateless" style="document" />
+      <wsdl:input name="SendBroadcastFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStatefulCookie" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStatefulNoCookie" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/CreateBroadcastFaxJobStateless" style="document" />
+      <wsdl:input name="CreateBroadcastFaxJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateBroadcastFaxJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStatefulCookie" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStatefulNoCookie" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBroadcastFaxJob">
+      <soap12:operation soapAction="https://api.westfax.com/SubmitBroadcastFaxJobStateless" style="document" />
+      <wsdl:input name="SubmitBroadcastFaxJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubmitBroadcastFaxJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxStatefulCookie" style="document" />
+      <wsdl:input name="SendFaxStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxStatefulNoCookie" style="document" />
+      <wsdl:input name="SendFaxStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFax">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxStateless" style="document" />
+      <wsdl:input name="SendFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxJobsStatefulCookie" style="document" />
+      <wsdl:input name="SendFaxJobsStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxJobsStatefulNoCookie" style="document" />
+      <wsdl:input name="SendFaxJobsStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFaxJobs">
+      <soap12:operation soapAction="https://api.westfax.com/SendFaxJobsStateless" style="document" />
+      <wsdl:input name="SendFaxJobsStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendFaxJobsStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap12:operation soapAction="https://api.westfax.com/SendVoiceCallStatefulCookie" style="document" />
+      <wsdl:input name="SendVoiceCallStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap12:operation soapAction="https://api.westfax.com/SendVoiceCallStatefulNoCookie" style="document" />
+      <wsdl:input name="SendVoiceCallStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendVoiceCall">
+      <soap12:operation soapAction="https://api.westfax.com/SendVoiceCallFaxStateless" style="document" />
+      <wsdl:input name="SendVoiceCallFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendVoiceCallFaxStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStatefulCookie" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStatefulNoCookie" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBroadcastVoiceJob">
+      <soap12:operation soapAction="https://api.westfax.com/SendBroadcastVoiceJobStateless" style="document" />
+      <wsdl:input name="SendBroadcastVoiceJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SendBroadcastVoiceJobStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastVoiceStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastVoiceStatusStateless" style="document" />
+      <wsdl:input name="GetBroadcastVoiceStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastVoiceStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetCallStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetCallStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetCallStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetCallStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCallStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetCallStatusStateless" style="document" />
+      <wsdl:input name="GetCallStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCallStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetBroadcastFaxStatusStateless" style="document" />
+      <wsdl:input name="GetBroadcastFaxStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBroadcastFaxStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxStatusStatefulCookie" style="document" />
+      <wsdl:input name="GetFaxStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxStatusStatefulNoCookie" style="document" />
+      <wsdl:input name="GetFaxStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFaxStatus">
+      <soap12:operation soapAction="https://api.westfax.com/GetFaxStatusStateless" style="document" />
+      <wsdl:input name="GetFaxStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetFaxStatusStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap12:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStatefulCookie" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap12:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStatefulNoCookie" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFaxRemovalNumber">
+      <soap12:operation soapAction="https://api.westfax.com/AddFaxRemovalNumberStateless" style="document" />
+      <wsdl:input name="AddFaxRemovalNumberStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddFaxRemovalNumberStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap12:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStatefulCookie" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap12:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStatefulNoCookie" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFaxGlobalRemovals">
+      <soap12:operation soapAction="https://api.westfax.com/QueryFaxGlobalRemovalsStateless" style="document" />
+      <wsdl:input name="QueryFaxGlobalRemovalsStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryFaxGlobalRemovalsStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxListStatefulCookie" style="document" />
+      <wsdl:input name="GetInboundFaxListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetInboundFaxListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxListStateless" style="document" />
+      <wsdl:input name="GetInboundFaxListStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxListStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulCookie" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulNoCookie" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewInboundFaxList">
+      <soap12:operation soapAction="https://api.westfax.com/GetNewInboundFaxListStatefulStateless" style="document" />
+      <wsdl:input name="GetNewInboundFaxListStatefulStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewInboundFaxListStatefulStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap12:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStatefulCookie" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap12:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStatefulNoCookie" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkInboundFaxesDownloaded">
+      <soap12:operation soapAction="https://api.westfax.com/MarkInboundFaxesDownloadedStateless" style="document" />
+      <wsdl:input name="MarkInboundFaxesDownloadedStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MarkInboundFaxesDownloadedStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxesStatefulCookie" style="document" />
+      <wsdl:input name="GetInboundFaxesStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStatefulCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxesStatefulNoCookie" style="document" />
+      <wsdl:input name="GetInboundFaxesStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStatefulNoCookie">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboundFaxes">
+      <soap12:operation soapAction="https://api.westfax.com/GetInboundFaxesStateless" style="document" />
+      <wsdl:input name="GetInboundFaxesStateless">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboundFaxesStateless">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SoapWebService">
+    <wsdl:port name="SoapWebServiceSoap" binding="tns:SoapWebServiceSoap">
+      <soap:address location="http://localhost/Polka.Api/SoapWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SoapWebServiceSoap12" binding="tns:SoapWebServiceSoap12">
+      <soap12:address location="http://localhost/Polka.Api/SoapWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

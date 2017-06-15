@@ -1,0 +1,10 @@
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\bin\Debug\Polka.Api.DemoApp.exe.config
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\bin\Debug\Polka.Api.DemoApp.exe
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\bin\Debug\Polka.Api.DemoApp.pdb
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\ResolveAssemblyReference.cache
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\Polka.Api.DemoApp.frmDemoApp.resources
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\Polka.Api.DemoApp.Properties.Resources.resources
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\ResGen.read.1.tlog
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\ResGen.write.1.tlog
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\Polka.Api.DemoApp.exe
+D:\Users\apaulson\Downloads\WestFaxDemoApp\WestFaxDemoApp\obj\Debug\Polka.Api.DemoApp.pdb
