@@ -50,3 +50,18 @@ The WestFax API supports stateless and stateful connections for each of the tran
 ```Set-Cookie: ASP.NET_SessionId=KQroCTeXzk65vsUylajktw; path=/```
 
 If the web client being used handles cookies automatically, the user can continue to execute methods in the API without manually passing credentials or a session token. If the user opts to manage the session token themselves, it will be returned in the body of the response. They will need to pass this token in the body of the request every time they execute a method. The examples below illustrate a call to authenticate and then what a subsequent call would look like with and without cookies (these examples are shortened for brevity).
+
+
+## Compression
+
+HTTP Connections can incorporate compression if both the server and the client support it. The WestFax API supports both gzip and deflate and will compress an outgoing stream if the client requests it. This is done by providing the following line in the header of the request:
+
+'''Accept-Encoding: gzip, deflate''
+When using SOAP and a .NET Environment, it is simple to enable compression for response data.
+
+''' C#
+ApiWebService webService = new ApiWebService();
+webService.EnableDecompression = true;
+'''
+
+For REST and RPC, most clients should allow appending headers to the request stream. In that case, add the Accept-Encoding directive listed above and the response will be encoded. When reading a response from the API, always check the Content-Encoding HTTP Header to determine if the response is encoded. If there were errors during the API call, the response may not be encoded.
