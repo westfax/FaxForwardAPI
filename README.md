@@ -66,3 +66,5 @@ webService.EnableDecompression = true;
 ```
 
 For REST and RPC, most clients should allow appending headers to the request stream. In that case, add the Accept-Encoding directive listed above and the response will be encoded. When reading a response from the API, always check the Content-Encoding HTTP Header to determine if the response is encoded. If there were errors during the API call, the response may not be encoded.
+
+ 
