@@ -1,3 +1,4 @@
+[](https://faxforward.com/wp-content/uploads/2017/06/ff_black.png)
 ## Welcome to the FaxForward API Documentation site
 
 
