@@ -57,6 +57,7 @@ If the web client being used handles cookies automatically, the user can continu
 HTTP Connections can incorporate compression if both the server and the client support it. The WestFax API supports both gzip and deflate and will compress an outgoing stream if the client requests it. This is done by providing the following line in the header of the request:
 
 ```Accept-Encoding: gzip, deflate```
+
 When using SOAP and a .NET Environment, it is simple to enable compression for response data.
 
 ```C#
