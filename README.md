@@ -1,5 +1,5 @@
-![FaxForward](https://faxforward.com/wp-content/uploads/2017/06/ff_black.png)
-## Welcome to the FaxForward API Documentation site
+![WESTFAX](http://westfax.com/wp-content/uploads/2016/05/westfaxMain.png)
+## Welcome to the Westfax API Documentation site
 
 
 ### Overview
