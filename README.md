@@ -1,4 +1,4 @@
-![WESTFAX](http://westfax.com/wp-content/uploads/2016/05/westfaxMain.png)
+![WESTFAX](http://westfax.com/wp-content/uploads/2017/08/WestFax_Color_100x300-300x100.png)
 ## Welcome to the Westfax API Documentation site
 
 
